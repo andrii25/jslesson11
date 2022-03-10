@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="" name="person">
+    <label>Name
+    <input name="name" type="text"/>
+    </label>
+
+    <label>Age
+        <input name="age" type="number"/>
+    </label>
+    <button id="btn">Send</button>
+</form>
+<hr>
+<form action="" name="car">
+    <label>Model CAR
+        <input name="model" type="text"/>
+    </label>
+    <label>Type
+        <input name="type" type="text"/>
+    </label>
+    <label>Volume
+        <input name="volume" type="number"/>
+    </label>
+    <button id="ton">Send</button>
+</form>
+<script>
+    // -створити форму з інпутами для name та age.
+    //     При відправці форми записати об'єкт в localstorage
+    let name = document.forms.person.name
+    let age = document.forms.person.age
+    let btn = document.getElementById('btn')
+    let key = 'key'
+
+    let back = (userName, userAge) => {
+        let user = {
+        name:userName,
+        age:userAge
+        }
+        localStorage.setItem(key, JSON.stringify(user))
+    }
+    btn.onclick = () => {
+        back(name.value, age.value)
+    }
+
+    // -створити форму з інпутами для model,type та volume автівки.
+    //     при відпарвці форми об'єкти зберігаються в масиві в локальному сховищі.
+    let model = document.forms.car.model
+    let type = document.forms.car.type
+    let volume = document.forms.car.volume
+    let ton = document.getElementById('ton')
+    let clef = 'keyCar'
+
+    let save = (modelCar,typeCar, volumeCar) => {
+        let array = JSON.parse(localStorage.getItem(clef)) || []
+
+        array.push({modelCar, typeCar, volumeCar})
+        localStorage.setItem(clef, JSON.stringify(array))
+    }
+    ton.onclick =() => {
+        save(model.value, type.value, volume.value)
+    }
+
+
+</script>
+</body>
+</html>
